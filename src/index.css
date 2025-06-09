@@ -1,9 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,400;0,600;0,700;1,200;1,600;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --color-light-base: var(--light-base-color);
+  --color-dark-base: var(--dark-base-color);
+  --color-contrast: var(--contrast-color);
+  --color-detail-light: var(--detail-light-color);
+  --color-detail-dark: var(--detail-dark-color);
+  --color-lightest: var(--lightest-color);
+  --color-darkest: var(--darkest-color);
+
+  --font-title: var(--title-font);
+  --font-subtitle: var(--subtitle-font);
+  --font-teste: var(--teste-font);
+
+  --breakpoint-mobile: 480px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-laptop: 1024px;
+  --breakpoint-desktop: 1200px;
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -42,6 +61,17 @@
 }
 
 :root {
+  --light-base-color: #f1ddbf;
+  --dark-base-color: #ecc94b;
+  --contrast-color: #a00b26;
+  --detail-light-color: #66add9;
+  --detail-dark-color: #26488c;
+  --lightest-color: white;
+  --darkest-color: black;
+
+  --title-font: "Aleo", serif;
+  --subtitle-font: "Source Sans Pro", serif;
+
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
