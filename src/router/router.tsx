@@ -4,7 +4,9 @@ import Home from "@/pages/Home/Home";
 import { EstruturaSidebarMain } from "@/components/EstruturaSidebarMain/EstruturaSidebarMain";
 import Cardapio from "@/pages/Cardapio/Cardapio";
 import Carrinho from "@/pages/Carrinho/Carrinho";
-import Sobre from "@/pages/Sobre/Sobre";
+import Produto from "@/pages/Produto/Produto";
+import Pedidos from "@/pages/Pedidos/Pedidos";
+import Login from "@/pages/Login/Login";
 
 export const router = createBrowserRouter([
   {
@@ -20,13 +22,21 @@ export const router = createBrowserRouter([
         element: <Cardapio />,
       },
       {
+        path: "/cardapio/produto/:id",
+        element: <Produto />,
+      },
+      {
         path: "carrinho",
         element: <Carrinho />,
       },
       {
-        path: "sobre",
-        element: <Sobre />,
+        path: "pedidos",
+        element: <Pedidos />,
       },
+      {
+        path: "login",
+        element: <Login />,
+      }
     ],
   },
 ]);
