@@ -27,6 +27,8 @@ export function useCarrinho() {
   const loggedUser = useAuth();
   const db = getFirestore();
 
+  const queryClient = useQueryClient();
+
   const adicionarItemCarrinho = useMutation<any, any, ItemCarrinho>({
     mutationFn: async (itemCarrinho: ItemCarrinho) => {
       if (!loggedUser) throw new Error("Usuário não autenticado.");
@@ -78,8 +80,6 @@ export function useCarrinho() {
       });
     },
   });
-
-  const queryClient = useQueryClient();
 
   const alterarQuantidadeItemCarrinho = useMutation({
     mutationFn: async ({

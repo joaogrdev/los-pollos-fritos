@@ -53,10 +53,10 @@ const BoxCadastrar = () => {
         await criarPedido.mutateAsync({});
         toastSuccess(
           "SUCESSO!",
-          "Usuário cadastrado com sucesso. Fazendo login...",
+          "Usuário cadastrado com sucesso.",
           "bottom-right"
         );
-        setTimeout(() => navigate("/cardapio"), 2500);
+        navigate("/cardapio");
       } catch (error) {
         console.log(error);
         handleFirebaseError(error);

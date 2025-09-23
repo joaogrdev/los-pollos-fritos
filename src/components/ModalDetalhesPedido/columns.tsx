@@ -15,6 +15,13 @@ export const columns = (): ColumnDef<ItemPedido>[] => [
   {
     accessorKey: "imagem",
     header: "Imagem",
+    cell: ({ row }) => (
+      <img
+        src={row.original?.imagem}
+        alt={row.original?.nome}
+        className={"w-12 h-6 object-cover"}
+      />
+    ),
   },
   {
     accessorKey: "nome",
@@ -32,6 +39,7 @@ export const columns = (): ColumnDef<ItemPedido>[] => [
   {
     accessorKey: "total",
     header: "Subtotal",
-    cell: ({ row }) => formatCurrency(row.original?.quantidade * row.original?.valor),
+    cell: ({ row }) =>
+      formatCurrency(row.original?.quantidade * row.original?.valor),
   },
 ];

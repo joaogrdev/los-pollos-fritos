@@ -14,6 +14,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Trash } from "lucide-react";
+import { useEnderecoPedido } from "@/hooks/useEnderecoPedido";
+import { handleFirebaseError } from "@/lib/firebaseError";
 
 const formSchema = z.object({
   cep: z
@@ -33,6 +35,8 @@ interface BuscadorCEPProps {
 }
 
 const BuscadorCEP = () => {
+  const { alterarEnderecoPedido } = useEnderecoPedido();
+
   const [cepResult, setCepResult] = useState<BuscadorCEPProps | null>(null);
   const [enderecoSaved, setEnderecoSaved] = useState<boolean>(false);
   const [dadosAdicionaisEndereco, setDadosAdicionaisEndereco] = useState({
@@ -75,6 +79,27 @@ const BuscadorCEP = () => {
       });
   };
 
+  const handleSalvarEndereco = async (tipo: string) => {
+    try {
+      await alterarEnderecoPedido.mutateAsync(
+        tipo === "adicionar"
+          ? `${cepResult?.logradouro}, ${dadosAdicionaisEndereco.numero}, ${cepResult?.bairro} (${dadosAdicionaisEndereco.complemento}) - ${cepResult?.localidade}/${cepResult?.uf}`
+          : ""
+      );
+      if (tipo === "adicionar") {
+        setEnderecoSaved(true);
+      } else {
+        form.reset();
+        setEnderecoSaved(false);
+        setCepResult(null);
+        setDadosAdicionaisEndereco({ numero: "", complemento: "" });
+      }
+    } catch (error) {
+      console.log(error);
+      handleFirebaseError(error);
+    }
+  };
+
   return (
     <>
       {cepResult ? (
@@ -82,7 +107,7 @@ const BuscadorCEP = () => {
           <div className={cn("flex items-center gap-2")}>
             <Trash
               className="w-4 h-4 cursor-pointer text-contrast hover:scale-110"
-              onClick={() => setCepResult(null)}
+              onClick={() => handleSalvarEndereco("remover")}
             />
             <p>CEP: {cepResult.cep}</p>
           </div>
@@ -137,9 +162,7 @@ const BuscadorCEP = () => {
           ) : (
             <Button
               className="w-full bg-contrast hover:bg-contrast/75"
-              onClick={() => {
-                setEnderecoSaved(true);
-              }}
+              onClick={() => handleSalvarEndereco("adicionar")}
             >
               Salvar endereço
             </Button>

@@ -1,6 +1,11 @@
-import { useMutation } from "@tanstack/react-query";
-import { getAuth } from "firebase/auth";
-import { addDoc, collection, getFirestore, serverTimestamp } from "firebase/firestore";
+import { useAuth } from "@/context/AuthContext";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  addDoc,
+  collection,
+  getFirestore,
+  serverTimestamp,
+} from "firebase/firestore";
 
 type Pedido = {
   data?: string;
@@ -8,27 +13,34 @@ type Pedido = {
   status?: string;
   total?: number;
   usuario_id?: string;
+  endereco?: string;
 };
 
-const auth = getAuth();
-const db = getFirestore();
-
 export function useCriarPedido() {
+  const loggedUser = useAuth();
+  const db = getFirestore();
+  const queryClient = useQueryClient();
+
   const criarPedido = useMutation<any, any, Pedido>({
     mutationFn: async (pedido: Pedido) => {
-      const user = auth.currentUser;
-      if (!user) throw new Error("Usuário não autenticado.");
+      if (!loggedUser) throw new Error("Usuário não autenticado.");
 
       const ordersRef = collection(db, "pedidos");
       const orderDoc = await addDoc(ordersRef, {
-        usuario_id: user.uid,
+        usuario_id: loggedUser.uid,
         desconto: pedido.desconto || 0,
         total: pedido.total || 0,
         status: pedido.status || "carrinho",
+        endereco: "",
         data: serverTimestamp(),
       });
 
       return orderDoc.id;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["carrinho", loggedUser?.uid],
+      });
     },
   });
 

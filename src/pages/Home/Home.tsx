@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
-import bandeiraModularGrid from "../../assets/bandeiraModularGrid.jpg";
-import polloModularGrid from "../../assets/polloModularGrid.jpg";
-import vasosModularGrid from "../../assets/vasosModularGrid.jpg";
-import burgerModularGrid from "../../assets/burgerModularGrid.jpg";
+import bandeiraModularGrid from "../../assets/bandeiraModularGrid.webp";
+import polloModularGrid from "../../assets/polloModularGrid.webp";
+import vasosModularGrid from "../../assets/vasosModularGrid.webp";
+import burgerModularGrid from "../../assets/burgerModularGrid.webp";
 import GridImage from "./GridImage/GridImage";
 import { useNavigate } from "react-router";
 
@@ -10,10 +10,12 @@ const socialIcons = [
   {
     icon: "https://img.icons8.com/?size=25&id=8808&format=png&color=ffffff",
     desc: "Linkedin",
+    link: "https://www.linkedin.com/in/joaogrs/",
   },
   {
     icon: "https://img.icons8.com/?size=25&id=106562&format=png&color=ffffff",
     desc: "GitHub",
+    link: "https://github.com/joaogrdev",
   },
 ];
 
@@ -29,13 +31,13 @@ const Home = () => {
         <GridImage
           src={bandeiraModularGrid}
           alt="Imagem Bandeira México"
-          wrapperClass="col-span-2 row-span-2 col-start-1 row-start-4"
+          wrapperClass="col-span-2 row-span-2 col-start-1 row-start-4 rounded-bl-xl"
           imageClass="rounded-bl-xl"
         />
         <GridImage
           src={polloModularGrid}
           alt="Imagem Frango Mexicano"
-          wrapperClass="col-span-2 row-span-2 col-start-3 row-start-4"
+          wrapperClass="col-span-2 row-span-2 col-start-3 row-start-4 rounded-r-xl"
           imageClass="rounded-r-xl"
         />
 
@@ -93,12 +95,14 @@ const Home = () => {
           </p>
           <div className={cn("flex items-center justify-center gap-2")}>
             {socialIcons.map((item) => (
-              <img
-                src={item.icon}
-                alt={`Ícone ${item.desc}`}
-                className={cn("fill-contrast hover:scale-115 cursor-pointer")}
-                title={item.desc}
-              />
+              <a href={item.link} key={item.desc} target="_blank">
+                <img
+                  src={item.icon}
+                  alt={`Ícone ${item.desc}`}
+                  className={cn("fill-contrast hover:scale-115 cursor-pointer")}
+                  title={item.desc}
+                />
+              </a>
             ))}
           </div>
         </div>
@@ -106,14 +110,14 @@ const Home = () => {
         <GridImage
           src={burgerModularGrid}
           alt="Imagem Hamburguer Mexicano"
-          wrapperClass="hidden sm:block row-span-3 col-start-1 row-start-1"
+          wrapperClass="hidden sm:block row-span-3 col-start-1 row-start-1 rounded-tl-xl"
           imageClass="rounded-tl-xl"
         />
 
         <GridImage
           src={vasosModularGrid}
           alt="Imagem Vasos Mexicanos"
-          wrapperClass="hidden laptop:block row-span-5 col-start-5 row-start-1"
+          wrapperClass="hidden laptop:block row-span-5 col-start-5 row-start-1 rounded-r-xl"
           imageClass="rounded-r-xl"
         />
       </div>

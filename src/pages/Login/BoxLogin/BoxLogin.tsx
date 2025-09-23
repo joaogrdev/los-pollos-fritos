@@ -112,8 +112,8 @@ const BoxLogin = () => {
           <span
             className="text-contrast cursor-pointer"
             onClick={() => {
-              form.setValue("email", "joao@gmail.com");
-              form.setValue("senha", "123123");
+              form.setValue("email", "teste@gmail.com");
+              form.setValue("senha", "teste123");
               form.handleSubmit(onSubmit)();
             }}
           >

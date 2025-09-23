@@ -9,10 +9,12 @@ import { useState } from "react";
 import { useCarrinho } from "@/hooks/useCarrinho";
 import { toastSuccess } from "@/lib/toasts";
 import { handleFirebaseError } from "@/lib/firebaseError";
+import { useAuth } from "@/context/AuthContext";
 
 const Produto = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const loggedUser = useAuth();
 
   const { produto, isLoading } = useProduto({ id: id! });
   const { adicionarItemCarrinho } = useCarrinho();
@@ -46,7 +48,9 @@ const Produto = () => {
       tipo === "adicionar"
         ? toastSuccess(
             "SUCESSO!",
-            `Produto ${produto?.nome} adicionado ao carrinho com sucesso!`,
+            `${quantidade}x ${produto?.nome} adicionado${
+              quantidade > 1 ? "s" : ""
+            } ao carrinho!`,
             "top-right"
           )
         : navigate("/carrinho");
@@ -139,26 +143,40 @@ const Produto = () => {
               </div>
 
               {/*CONTAINER DE BOTOES*/}
-              <div className={cn("flex flex-col gap-3 mb-10")}>
-                <Button
-                  variant={"secondary"}
-                  className={cn(
-                    "bg-dark-base text-contrast hover:bg-light-base hover:text-contrast transition-all"
-                  )}
-                  onClick={() => handleAdicionarItemCarrinho("adicionar")}
-                >
-                  Adicionar ao carrinho
-                </Button>
-                <Button
-                  variant={"secondary"}
-                  className={cn(
-                    "bg-contrast text-light-base hover:text-contrast"
-                  )}
-                  onClick={() => handleAdicionarItemCarrinho("comprar")}
-                >
-                  Comprar agora
-                </Button>
-              </div>
+              {loggedUser ? (
+                <div className={cn("flex flex-col gap-3 mb-10")}>
+                  <Button
+                    variant={"secondary"}
+                    className={cn(
+                      "bg-dark-base text-contrast hover:bg-light-base hover:text-contrast transition-all"
+                    )}
+                    onClick={() => handleAdicionarItemCarrinho("adicionar")}
+                  >
+                    Adicionar ao carrinho
+                  </Button>
+                  <Button
+                    variant={"secondary"}
+                    className={cn(
+                      "bg-contrast text-light-base hover:text-contrast"
+                    )}
+                    onClick={() => handleAdicionarItemCarrinho("comprar")}
+                  >
+                    Comprar agora
+                  </Button>
+                </div>
+              ) : (
+                <div className={cn("flex flex-col gap-3 mb-10")}>
+                  <Button
+                    variant={"secondary"}
+                    className={cn(
+                      "font-semibold bg-dark-base text-contrast hover:bg-light-base hover:text-contrast transition-all"
+                    )}
+                    onClick={() => navigate("/login")}
+                  >
+                    Faça login para comprar
+                  </Button>
+                </div>
+              )}
 
               {/*DESCRICAO DO PRODUTO*/}
               <div className={cn("font-subtitle overflow-auto")}>
