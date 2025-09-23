@@ -20,7 +20,7 @@ const ModalUpdateQtdItemCart = ({
   produto: Produto;
 }) => {
   const { alterarQuantidadeItemCarrinho } = useCarrinho();
-  
+
   const [quantidade, setQuantidade] = useState<number>(
     produto?.quantidade ?? 1
   );
@@ -65,16 +65,16 @@ const ModalUpdateQtdItemCart = ({
         <DialogTitle className="hidden">Atualizar Quantidade</DialogTitle>
         <DialogHeader
           className={cn(
-            "flex flex-row justify-between items-center p-2 text-light-base bg-contrast -m-0.5 rounded-t-md"
+            "flex flex-row justify-between items-center p-2 gap-10 text-light-base bg-contrast -m-0.5 rounded-t-md"
           )}
         >
-          <span className="text-xs font-semibold">ATUALIZAR QUANTIDADE</span>
+          <span>ATUALIZAR QUANTIDADE</span>
           <DialogClose>
-            <X className="h-4 w-4" />
+            <X className="h-4 w-4 hover:scale-115" />
           </DialogClose>
         </DialogHeader>
 
-        <p className="text-center">{produto?.nome}</p>
+        <p className="text-center text-2xl">{produto?.nome}</p>
 
         <div className={cn("flex items-center mx-auto")}>
           <Button
@@ -100,11 +100,11 @@ const ModalUpdateQtdItemCart = ({
           </Button>
         </div>
 
-        <p className="text-center">
+        <p className="text-center text-lg">
           Subtotal: {formatCurrency(quantidade * produto?.valor)}
         </p>
 
-        <div className="flex gap-2 px-2 mb-2">
+        <div className="grid grid-cols-1 tablet:grid-cols-2 gap-2 px-2 mb-2">
           <Button onClick={() => closeModal()}>Cancelar</Button>
           <Button
             disabled={quantidade === 0}
@@ -113,7 +113,7 @@ const ModalUpdateQtdItemCart = ({
               "bg-dark-base text-contrast hover:bg-contrast hover:text-dark-base"
             )}
           >
-            Atualizar
+            {alterarQuantidadeItemCarrinho.isPending ? "Salvando..." : "Salvar"}
           </Button>
         </div>
       </DialogContent>

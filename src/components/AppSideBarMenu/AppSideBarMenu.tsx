@@ -16,7 +16,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useGetCarrinho } from "@/hooks/useGetCarrinho";
 
 const data = [
-  { title: "Home", url: "/", isActive: true },
+  { title: "Início", url: "/", isActive: true },
   { title: "Cardápio", url: "/cardapio", isActive: false },
   { title: "Carrinho", url: "/carrinho", isActive: false },
   { title: "Pedidos", url: "/pedidos", isActive: false },

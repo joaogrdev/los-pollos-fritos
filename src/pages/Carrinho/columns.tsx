@@ -1,6 +1,6 @@
 import { formatCurrency } from "@/lib/utils";
 import type { ColumnDef } from "@tanstack/react-table";
-import { Pen, XSquare } from "lucide-react";
+import { Pen, Trash } from "lucide-react";
 import type { Produto } from "@/types/produto";
 
 export const columns = (
@@ -12,14 +12,14 @@ export const columns = (
     id: "acoes",
     header: "Ações",
     cell: ({ row }) => (
-      <XSquare
-        className={
-          "cursor-pointer h-5 w-5 rounded-xs text-contrast hover:bg-contrast hover:text-light-base"
-        }
-        onClick={() => handleRemoveItemCart(row.original?.id)}
-      >
-        <title>Remover</title>
-      </XSquare>
+      <div className="p-1 hover:bg-contrast w-fit rounded-md cursor-pointer hover:text-light-base transition-all duration-200">
+        <Trash
+          className="w-4 text-contrast hover:text-light-base"
+          onClick={() => handleRemoveItemCart(row.original?.id)}
+        >
+          <title>Remover</title>
+        </Trash>
+      </div>
     ),
   },
   {
@@ -35,15 +35,6 @@ export const columns = (
         }
       />
     ),
-  },
-  {
-    accessorKey: "nome",
-    header: "Produto",
-  },
-  {
-    accessorKey: "valor",
-    header: "Valor Unitário",
-    cell: ({ row }) => formatCurrency(row.original?.valor),
   },
   {
     accessorKey: "quantidade",
@@ -65,8 +56,18 @@ export const columns = (
     },
   },
   {
+    accessorKey: "nome",
+    header: "Produto",
+  },
+  {
+    accessorKey: "valor",
+    header: "Valor Unitário",
+    cell: ({ row }) => formatCurrency(row.original?.valor),
+  },
+  {
     accessorKey: "total",
     header: "Subtotal",
-    cell: ({ row }) => formatCurrency(row.original?.valor * row.original?.quantidade),
+    cell: ({ row }) =>
+      formatCurrency(row.original?.valor * row.original?.quantidade),
   },
 ];

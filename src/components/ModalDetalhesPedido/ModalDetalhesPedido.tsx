@@ -5,7 +5,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog";
-import { cn } from "@/lib/utils";
+import { cn, formatCurrency, formatTimeStamp } from "@/lib/utils";
 import { X } from "lucide-react";
 import { DataTable } from "./datatable";
 import { columns } from "./columns";
@@ -22,6 +22,7 @@ const ModalDetalhesPedido = ({
   pedidoId: string;
 }) => {
   const { pedido, isLoading, isSuccess, error } = usePedido(pedidoId);
+  console.log(error?.message);
 
   return (
     <Dialog open={stateModal} onOpenChange={(open) => !open && toggleModal()}>
@@ -32,7 +33,9 @@ const ModalDetalhesPedido = ({
             "flex flex-row justify-between items-center p-2 text-light-base bg-contrast -m-0.5 rounded-t-md"
           )}
         >
-          <span className="font-semibold">Detalhes do pedido</span>
+          <span className="font-semibold">
+            DETALHES DO PEDIDO - Cód: {pedido?.id}
+          </span>
           <DialogClose>
             <X className="h-4 w-4" />
           </DialogClose>
@@ -42,10 +45,11 @@ const ModalDetalhesPedido = ({
         {isSuccess && pedido && (
           <>
             <div className="px-5">
-              <p>Código do pedido: {pedido?.id}</p>
-              <p>Envio: Av. Fulano de Tal</p>
-              <p className="font-semibold text-lg">
-                Valor total: {pedido?.total}
+              <p>Data do pedido: {formatTimeStamp(pedido?.data)}</p>
+              <p>Envio: {pedido?.endereco}</p>
+              <p>Desconto: {formatCurrency(pedido?.desconto)}</p>
+              <p className="font-semibold text-xl">
+                Valor total: {formatCurrency(pedido?.total)}
               </p>
             </div>
             <div className="p-5 bg-dark-base/50 overflow-auto">

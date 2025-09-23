@@ -28,6 +28,7 @@ export type Pedido = {
   total: number;
   usuario_id: string;
   itens?: ItemPedido[];
+  endereco?: string;
 };
 
 export function usePedido(pedidoId: string) {
@@ -48,6 +49,7 @@ export function usePedido(pedidoId: string) {
       // pega os itens vinculados a esse pedido
       const itensQuery = query(
         collection(db, "itens-pedido"),
+        where("usuario_id", "==", loggedUser.uid),
         where("pedido_id", "==", pedidoId)
       );
       const itensPedido = await getDocs(itensQuery);

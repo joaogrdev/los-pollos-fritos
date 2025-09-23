@@ -6,9 +6,10 @@ import { columns } from "./columns";
 import ModalDetalhesPedido from "@/components/ModalDetalhesPedido/ModalDetalhesPedido";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import { usePedidos } from "@/hooks/usePedidos";
+import ErroMsgTabelas from "@/components/ErroMsgTabelas/ErroMsgTabelas";
 
 const Pedidos = () => {
-  const { pedidos, isLoading, isSuccess } = usePedidos();
+  const { pedidos, isLoading, isSuccess, error } = usePedidos();
   const [isOpenModalDetalhesPedido, setIsOpenModalDetalhesPedido] = useState({
     isOpen: false,
     pedidoId: null,
@@ -29,15 +30,17 @@ const Pedidos = () => {
         pedidoId={isOpenModalDetalhesPedido.pedidoId || ""}
       />
       {isLoading ? (
-        <LoadingSpinner position="start" />
+        <LoadingSpinner />
       ) : isSuccess && pedidos?.length ? (
         <DataTable
           data={pedidos || []}
           columns={columns(handleToggleModalPedido)}
         />
       ) : isSuccess && pedidos?.length === 0 ? (
-        <p className="text-lg font-semibold">Nenhum pedido encontrado</p>
-      ) : null}
+        <ErroMsgTabelas msg="Nenhum pedido encontrado." />
+      ) : (
+        error && <ErroMsgTabelas msg="Erro ao carregar pedidos." />
+      )}
     </section>
   );
 };

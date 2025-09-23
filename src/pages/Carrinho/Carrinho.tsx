@@ -15,7 +15,7 @@ import { useCarrinho } from "@/hooks/useCarrinho";
 import { toastSuccess } from "@/lib/toasts";
 import { handleFirebaseError } from "@/lib/firebaseError";
 import { Button } from "@/components/ui/button";
-import { CircleOff } from "lucide-react";
+import ErroMsgTabelas from "@/components/ErroMsgTabelas/ErroMsgTabelas";
 
 const Cardapio = () => {
   const { carrinho, isLoading, isSuccess, error } = useGetCarrinho();
@@ -28,8 +28,7 @@ const Cardapio = () => {
     {} as Produto
   );
 
-  const openZoomInImageModal = (imagem: string) =>
-    setZoomInImage(imagem);
+  const openZoomInImageModal = (imagem: string) => setZoomInImage(imagem);
   const closeModal = () => {
     setZoomInImage("");
     setIsOpenModalUpdateQtdItemCart(false);
@@ -69,7 +68,7 @@ const Cardapio = () => {
       <div className="relative">
         <SectionTitle title="CARRINHO" />
         <Button
-          disabled={limparCarrinho.isPending}
+          disabled={limparCarrinho.isPending || !carrinho?.length}
           onClick={() => handleLimparCarrinho()}
           className="absolute top-1/2 -translate-y-1/2 right-2 flex items-center w-fit border border-contrast bg-light-base text-contrast hover:bg-contrast hover:text-light-base"
         >
@@ -85,7 +84,7 @@ const Cardapio = () => {
       <div className="w-full h-full flex flex-col gap-2">
         <div>
           {isLoading ? (
-            <LoadingSpinner position="start" />
+            <LoadingSpinner />
           ) : isSuccess && carrinho?.length ? (
             <DataTable
               data={carrinho}
@@ -96,12 +95,9 @@ const Cardapio = () => {
               )}
             />
           ) : isSuccess && carrinho?.length === 0 ? (
-            <p className="flex items-center bg-light-base/50 rounded-md justify-center gap-2 mb-2 py-5 w-full">
-              <CircleOff className="w-4 text-contrast" />
-              Nenhum item no carrinho
-            </p>
+            <ErroMsgTabelas msg="Nenhum item no carrinho." />
           ) : (
-            error && <p>Erro ao carregar carrinho.</p>
+            error && <ErroMsgTabelas msg="Erro ao carregar carrinho." />
           )}
         </div>
         <div className="grid grid-cols-1 tablet:grid-cols-2 gap-4 min-h-43">

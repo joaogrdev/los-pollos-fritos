@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
-import { getAuth } from "firebase/auth";
+import { useAuth } from "@/context/AuthContext";
 
 type Pedido = {
   id: string;
@@ -13,6 +13,7 @@ type Pedido = {
 };
 
 export function usePedidos() {
+  const loggedUser = useAuth();
   const {
     data: pedidos,
     isLoading,
@@ -21,12 +22,14 @@ export function usePedidos() {
   } = useQuery({
     queryKey: ["pedidos"],
     queryFn: async (): Promise<Pedido[]> => {
-      const auth = getAuth();
-      const user = auth.currentUser;
-      if (!user) throw new Error("Usuário não autenticado");
+      if (!loggedUser) throw new Error("Usuário não autenticado.");
 
       const ordersRef = collection(db, "pedidos");
-      const q = query(ordersRef, where("usuario_id", "==", user.uid));
+      const q = query(
+        ordersRef,
+        where("usuario_id", "==", loggedUser.uid),
+        where("status", "==", "pedido")
+      );
       const querySnapshot = await getDocs(q);
 
       const orders: any[] = [];
