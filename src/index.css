@@ -143,8 +143,32 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    font-family: "Source Sans Pro", serif;
   }
   body {
     @apply bg-background text-foreground;
   }
+  /* styles.css */
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 7px;
+  }
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background: var(--light-base-color);
+  }
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background-color: var(--contrast-color);
+  }
+  .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield; /* Firefox */
+}
 }
