@@ -6,6 +6,7 @@ interface GridImageProps {
   alt: string;
   wrapperClass?: string;
   imageClass?: string;
+  imgFallback: string;
 }
 
 const GridImage = ({
@@ -13,6 +14,7 @@ const GridImage = ({
   alt,
   wrapperClass = "",
   imageClass = "",
+  imgFallback,
 }: GridImageProps) => {
   const [loaded, setLoaded] = useState(false);
 
@@ -31,6 +33,7 @@ const GridImage = ({
           loaded ? "opacity-100" : "opacity-0"
         )}
         onLoad={() => setLoaded(true)}
+        onError={(e) => (e.currentTarget.src = imgFallback)}
       />
       {!loaded && <div className="absolute inset-0 animate-pulse"></div>}
     </div>
