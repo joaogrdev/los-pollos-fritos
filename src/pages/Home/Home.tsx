@@ -29,16 +29,18 @@ const Home = () => {
         )}
       >
         <GridImage
-          src={bandeiraModularGrid}
+          src="https://i.postimg.cc/nzL93PQW/bandeira-Modular-Grid.webp"
           alt="Imagem Bandeira México"
           wrapperClass="col-span-2 row-span-2 col-start-1 row-start-4 rounded-bl-xl"
           imageClass="rounded-bl-xl"
+          imgFallback={bandeiraModularGrid}
         />
         <GridImage
-          src={polloModularGrid}
+          src="https://i.postimg.cc/3w1DCTWp/pollo-Modular-Grid.webp"
           alt="Imagem Frango Mexicano"
           wrapperClass="col-span-2 row-span-2 col-start-3 row-start-4 rounded-r-xl"
           imageClass="rounded-r-xl"
+          imgFallback={polloModularGrid}
         />
 
         <div
@@ -108,17 +110,19 @@ const Home = () => {
         </div>
 
         <GridImage
-          src={burgerModularGrid}
+          src="https://i.postimg.cc/MGqQQTZq/burger-Modular-Grid.webp"
           alt="Imagem Hamburguer Mexicano"
           wrapperClass="hidden sm:block row-span-3 col-start-1 row-start-1 rounded-tl-xl"
           imageClass="rounded-tl-xl"
+          imgFallback={burgerModularGrid}
         />
 
         <GridImage
-          src={vasosModularGrid}
+          src="https://i.postimg.cc/XYMFnLTZ/vasos-Modular-Grid.webp"
           alt="Imagem Vasos Mexicanos"
           wrapperClass="hidden laptop:block row-span-5 col-start-5 row-start-1 rounded-r-xl"
           imageClass="rounded-r-xl"
+          imgFallback={vasosModularGrid}
         />
       </div>
     </section>
