@@ -52,5 +52,3 @@ npm run dev
 
 ## 🧑‍💻 Autor
 Feito por <a href='https://www.linkedin.com/in/joaogrs/' target='_blank'>João Gabriel Ribeiro</a>
-
-## 👉 Confira em produção: <a href="https://los-pollos-fritos.vercel.app/" target="_blank">Los Pollos Fritos</a>
