@@ -3,6 +3,8 @@
 Los Pollos Fritos é meu novo projeto de e-commerce front-end, criado para transformar uma ideia em uma experiência de compra online rápida, intuitiva e confiável.
 Com interface moderna, fluxos de pedidos eficientes e dados organizados, simula o funcionamento de um sistema de produção real.
 
+<a href="https://los-pollos-fritos.vercel.app" target="_blank">Los Pollos Fritos</a>
+
 ## ✨ Funcionalidades
 
 - 🛒 Experiência completa de compra: listagem de produtos, carrinho persistente, autenticação de usuários e gerenciamento de pedidos.
