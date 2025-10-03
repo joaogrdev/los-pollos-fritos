@@ -1,54 +1,54 @@
-# React + TypeScript + Vite
+# 🍗 Los Pollos Fritos
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Los Pollos Fritos é meu novo projeto de e-commerce front-end, criado para transformar uma ideia em uma experiência de compra online rápida, intuitiva e confiável.
+Com interface moderna, fluxos de pedidos eficientes e dados organizados, simula o funcionamento de um sistema de produção real.
 
-Currently, two official plugins are available:
+## ✨ Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🛒 Experiência completa de compra: listagem de produtos, carrinho persistente, autenticação de usuários e gerenciamento de pedidos.
+- 📱 Interface responsiva e rápida, pensada para usabilidade real de um e-commerce.
+- 🔄 Fluxos inteligentes para adicionar, atualizar e remover itens do carrinho em tempo real.
+- 🔐 Autenticação de usuários integrada com Firebase Authentication.
+- ☁️ Banco de dados em nuvem com Firestore, garantindo escalabilidade e confiabilidade.
 
-## Expanding the ESLint configuration
+## ⚙️ Tecnologias e práticas aplicadas
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React + TypeScript** — Componentização, tipagem estática e segurança no desenvolvimento
+- **TailwindCSS + Shadcn/UI** — Estilo moderno, consistente e produtivo
+- **Firebase Authentication + Firestore** — Autenticação e gerenciamento de dados em tempo real
+- **React Query** — Gerenciamento de cache e requisições assíncronas
+- **React Hook Form + Zod** — Formulários tipados com validação robusta
+- **Vercel** — Deploy contínuo e escalável
+- **Git Flow** — Organização de branches (main, dev e features)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 📸 Preview
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+<img src="https://media.licdn.com/dms/image/v2/D4E2DAQED53zEvYIT4Q/profile-treasury-image-shrink_1280_1280/B4EZl8NcHqIwAU-/0/1758725524818?e=1760068800&v=beta&t=htxjCSKxekfSkvy0PiMQIB_Qrbwtde3zVfFYtRUdrtM" alt="preview Los Pollos Fritos" style="width: 600px; ">
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Como rodar o projeto localmente
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+1. Clone o repositório:
+git clone https://github.com/joaogrdev/los-pollos-fritos.git
+
+2. Entre na pasta:
+cd los-pollos-fritos
+
+3. Instale as dependências:
+npm install
+
+4. Configure as variáveis de ambiente do Firebase no arquivo .env.
+
+5. Rode o servidor de desenvolvimento:
+npm run dev
+
+## 📌 Possíveis melhorias
+
+- Implementar métodos de pagamento simulados
+- Criar painel administrativo para gerenciar pedidos e produtos
+- Melhorar SEO e acessibilidade
+- Adicionar suporte a múltiplos idiomas
+
+## 🧑‍💻 Autor
+Feito por <a href='https://www.linkedin.com/in/joaogrs/' target='_blank'>João Gabriel Ribeiro</a>
+
+## 👉 Confira em produção: <a href="https://los-pollos-fritos.vercel.app/" target="_blank">Los Pollos Fritos</a>
